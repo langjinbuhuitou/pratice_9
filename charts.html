@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>数据可视化 - 校园自习室信息与数据展示中心</title>
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-campus">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">校园自习室展示中心</a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="rooms.html">自习室查询</a></li>
+          <li class="nav-item"><a class="nav-link" href="charts.html">数据可视化</a></li>
+          <li class="nav-item"><a class="nav-link" href="scene3d.html">三维自习室</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <h1 class="h3 mb-3">数据可视化</h1>
+
+    <!-- 数据加载错误提示区域 -->
+    <div id="charts-error"></div>
+
+    <div class="row">
+      <!-- 图表一：饼图 —— 全校座位占用状态分布 -->
+      <div class="col-12 col-lg-6">
+        <div class="chart-box">
+          <h2 class="h5">全校座位占用状态分布（饼图）</h2>
+          <div id="pie-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <!-- 图表二：柱状图 —— 各自习室上座率对比 -->
+      <div class="col-12 col-lg-6">
+        <div class="chart-box">
+          <h2 class="h5">各自习室上座率对比（柱状图）</h2>
+          <div id="bar-chart" class="chart-container"></div>
+        </div>
+      </div>
+      <!-- 图表三：折线图 —— 一周签到人次趋势 -->
+      <div class="col-12">
+        <div class="chart-box">
+          <h2 class="h5">一周自习签到人次趋势（折线图）</h2>
+          <div id="line-chart" class="chart-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 图表原始数据对照表：便于核验图表与数据是否一致 -->
+    <section aria-label="图表数据对照" class="mt-2">
+      <h2 class="h5">图表数据对照表</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover bg-white" id="data-table">
+          <thead>
+            <tr>
+              <th>自习室</th><th>校区</th><th>总座位</th><th>已占用</th><th>上座率</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0">校园自习室信息与数据展示中心 &copy; <span id="footer-year"></span> | 软件开发综合实践期末大作业</p>
+    </div>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="libs/echarts.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/charts.js"></script>
+</body>
+</html>
