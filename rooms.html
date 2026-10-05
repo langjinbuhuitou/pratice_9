@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自习室查询 - 校园自习室信息与数据展示中心</title>
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-campus">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">校园自习室展示中心</a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="rooms.html">自习室查询</a></li>
+          <li class="nav-item"><a class="nav-link" href="charts.html">数据可视化</a></li>
+          <li class="nav-item"><a class="nav-link" href="scene3d.html">三维自习室</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <h1 class="h3 mb-3">自习室查询</h1>
+
+    <!-- 数据加载错误提示区域 -->
+    <div id="rooms-error"></div>
+
+    <!-- 筛选与搜索表单 -->
+    <form id="filter-form" class="card p-3 mb-3" novalidate>
+      <div class="row g-3 align-items-end">
+        <div class="col-6 col-md-2">
+          <label for="campus-select" class="form-label">校区</label>
+          <select id="campus-select" class="form-select">
+            <option value="">全部校区</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-2">
+          <label for="floor-select" class="form-label">楼层</label>
+          <select id="floor-select" class="form-select">
+            <option value="">全部楼层</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-2">
+          <label for="status-select" class="form-label">座位状态</label>
+          <select id="status-select" class="form-select">
+            <option value="">全部状态</option>
+            <option value="空闲充足">空闲充足</option>
+            <option value="座位紧张">座位紧张</option>
+            <option value="即将满员">即将满员</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3">
+          <label class="form-label d-block">设施</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input facility-check" type="checkbox" value="电源" id="fac-power">
+            <label class="form-check-label" for="fac-power">电源</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input facility-check" type="checkbox" value="空调" id="fac-ac">
+            <label class="form-check-label" for="fac-ac">空调</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input facility-check" type="checkbox" value="WiFi" id="fac-wifi">
+            <label class="form-check-label" for="fac-wifi">WiFi</label>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <label for="sort-select" class="form-label">排序</label>
+          <select id="sort-select" class="form-select">
+            <option value="rate-asc">上座率从低到高</option>
+            <option value="rate-desc">上座率从高到低</option>
+            <option value="seats-desc">座位数从多到少</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-9">
+          <label for="keyword-input" class="form-label">名称搜索</label>
+          <input type="text" id="keyword-input" class="form-control"
+                 placeholder="输入自习室名称关键词，如：文汇楼" maxlength="20">
+          <div class="invalid-feedback" id="keyword-feedback">
+            关键词只能包含中文、字母和数字，且不超过 20 个字符。
+          </div>
+        </div>
+        <div class="col-12 col-md-3 d-grid d-md-flex">
+          <button type="submit" class="btn btn-primary me-md-2">搜索</button>
+          <button type="button" class="btn btn-outline-secondary" id="reset-btn">重置</button>
+        </div>
+      </div>
+    </form>
+
+    <p class="text-muted" id="result-count">共 0 个结果</p>
+
+    <!-- 结果卡片列表 -->
+    <div class="row g-3" id="room-list"></div>
+
+    <!-- 详情模态框 -->
+    <div class="modal fade" id="room-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">自习室详情</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0">校园自习室信息与数据展示中心 &copy; <span id="footer-year"></span> | 软件开发综合实践期末大作业</p>
+    </div>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rooms.js"></script>
+</body>
+</html>
