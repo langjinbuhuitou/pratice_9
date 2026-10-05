@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园自习室信息与数据展示中心 - 首页</title>
+  <link rel="stylesheet" href="libs/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 导航栏：Bootstrap 折叠菜单，手机端自动变为汉堡按钮 -->
+  <nav class="navbar navbar-expand-lg navbar-campus">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">校园自习室展示中心</a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+          <li class="nav-item"><a class="nav-link" href="rooms.html">自习室查询</a></li>
+          <li class="nav-item"><a class="nav-link" href="charts.html">数据可视化</a></li>
+          <li class="nav-item"><a class="nav-link" href="scene3d.html">三维自习室</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 顶部横幅 -->
+  <header class="hero text-center">
+    <div class="container">
+      <h1>校园自习室信息与数据展示中心</h1>
+      <p class="lead">实时查看各自习室座位占用情况，帮你快速找到安静空位</p>
+      <a href="rooms.html" class="btn btn-light btn-lg mt-2">立即查询空位</a>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <!-- 数据加载错误提示区域 -->
+    <div id="index-error"></div>
+
+    <!-- 概览统计卡片：数据来自 rooms.json -->
+    <section aria-label="概览统计">
+      <div class="row g-3" id="stat-row">
+        <div class="col-6 col-md-3">
+          <div class="card stat-card text-center p-3">
+            <div class="text-muted small">开放自习室</div>
+            <div class="stat-num" id="stat-rooms">-</div>
+            <div class="text-muted small">间</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stat-card text-center p-3">
+            <div class="text-muted small">座位总数</div>
+            <div class="stat-num" id="stat-seats">-</div>
+            <div class="text-muted small">个</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stat-card text-center p-3">
+            <div class="text-muted small">当前空闲座位</div>
+            <div class="stat-num" id="stat-free">-</div>
+            <div class="text-muted small">个</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stat-card text-center p-3">
+            <div class="text-muted small">平均上座率</div>
+            <div class="stat-num" id="stat-rate">-</div>
+            <div class="text-muted small">%</div>
+          </div>
+        </div>
+      </div>
+      <p class="text-muted small mt-2">数据更新时间：<span id="data-updated">加载中…</span></p>
+    </section>
+
+    <!-- 公告栏 -->
+    <section aria-label="公告栏" class="mt-4">
+      <h2 class="h4 mb-3">最新公告</h2>
+      <ul class="list-group" id="notice-list">
+        <li class="list-group-item text-muted">公告加载中…</li>
+      </ul>
+    </section>
+
+    <!-- 功能入口 -->
+    <section aria-label="功能入口" class="mt-4">
+      <h2 class="h4 mb-3">功能入口</h2>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card room-card p-3">
+            <h3 class="h5">自习室查询</h3>
+            <p class="text-muted">按校区、楼层、设施筛选自习室，搜索名称，查看实时空位。</p>
+            <a href="rooms.html" class="btn btn-outline-primary mt-auto">进入查询</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card room-card p-3">
+            <h3 class="h5">数据可视化</h3>
+            <p class="text-muted">座位占用占比、各自习室上座率对比与一周客流趋势图表。</p>
+            <a href="charts.html" class="btn btn-outline-primary mt-auto">查看图表</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card room-card p-3">
+            <h3 class="h5">三维自习室</h3>
+            <p class="text-muted">以 3D 方式漫游自习室座位布局，点击座位查看占用状态。</p>
+            <a href="scene3d.html" class="btn btn-outline-primary mt-auto">进入三维场景</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer text-center">
+    <div class="container">
+      <p class="mb-0">校园自习室信息与数据展示中心 &copy; <span id="footer-year"></span> | 软件开发综合实践期末大作业</p>
+    </div>
+  </footer>
+
+  <script src="libs/bootstrap.bundle.min.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
