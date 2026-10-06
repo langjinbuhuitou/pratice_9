@@ -178,7 +178,15 @@ function buildRoom(room) {
     // 桌子
     var desk = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.7, 0.5), deskMaterial);
     desk.position.set(x, 0.35, z);
+    // 座位信息同时挂在桌子和椅子上，点中哪个都能查看（增大可点范围）
+    var seatInfo = {
+      seatNo: String.fromCharCode(65 + row) + "-" + ("0" + (col + 1)).slice(-2),
+      occupied: states[i],
+      roomName: room.name
+    };
+    desk.userData = seatInfo;
     seatGroup.add(desk);
+    seatMeshes.push(desk);
 
     // 椅子：颜色表示占用状态
     var chairColor = states[i] ? COLOR_OCCUPIED : COLOR_FREE;
@@ -187,12 +195,7 @@ function buildRoom(room) {
       new THREE.MeshLambertMaterial({ color: chairColor })
     );
     chair.position.set(x, 0.25, z + 0.7);
-    // 把座位信息挂在网格上，点击时读取
-    chair.userData = {
-      seatNo: String.fromCharCode(65 + row) + "-" + ("0" + (col + 1)).slice(-2),
-      occupied: states[i],
-      roomName: room.name
-    };
+    chair.userData = seatInfo;
     seatGroup.add(chair);
     seatMeshes.push(chair);
 
@@ -209,10 +212,10 @@ function buildRoom(room) {
 
   scene.add(seatGroup);
 
-  // 相机放到房间斜上方，对准座位区中心
+  // 相机放到房间斜上方，对准座位区中心（距离随座位排数调整）
   var centerX = (SEATS_PER_ROW - 1) * 1.4 / 2;
   var centerZ = (rows - 1) * 1.8 / 2;
-  camera.position.set(centerX, rows * 1.6 + 8, centerZ + rows * 2.2 + 8);
+  camera.position.set(centerX, rows * 0.9 + 5, centerZ + rows * 1.3 + 5);
   controls.target.set(centerX, 0, centerZ);
   controls.update();
 
